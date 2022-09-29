@@ -19,7 +19,7 @@ public class Grafo {
             this.direcionado = br.readLine();
             this.numVertices = Integer.parseInt(br.readLine());
 
-            matCoor = new int[this.numVertices][2];
+            this.matCoor = new int[this.numVertices][2];
 
             for (int i = 0; i < this.numVertices; i++) {
                 st = new StringTokenizer(br.readLine());
@@ -41,11 +41,12 @@ public class Grafo {
                 System.out.println(matCoor[i][0] + " " + matCoor[i][1]);
             }
 
-            if (this.direcionado.equals("direcinado=sim")){
+            this.numArestas =
+            /*if (this.direcionado.equals("direcinado=sim")){
                 System.out.println("Sim");
             } else {
                 System.out.println("Não");
-            }
+            }*/
 
         } catch (IOException ex) {
             ex.printStackTrace();
