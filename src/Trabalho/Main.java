@@ -5,6 +5,7 @@ public class Main {
         Grafo grafo = new Grafo();
 
         grafo.importar();
+        grafo.exportar();
         //menu();
     }
 
