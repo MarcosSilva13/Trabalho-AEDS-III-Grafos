@@ -1,12 +1,51 @@
 package Trabalho;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
         Grafo grafo = new Grafo();
+        int opcao, origem, destino, peso;
 
-        grafo.importar();
-        grafo.exportar();
-        //menu();
+        do {
+            menu();
+            opcao = scan.nextInt();
+            switch (opcao) {
+                case 1:
+                    grafo.importar();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    System.out.print("Informe a origem: ");
+                    origem = scan.nextInt();
+                    System.out.print("Informe o destino: ");
+                    destino = scan.nextInt();
+                    System.out.print("Informe o peso: ");
+                    peso = scan.nextInt();
+                    grafo.inserirAresta(origem,destino,peso);
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+                case 11:
+                    grafo.exportar();
+                    break;
+            }
+        } while (opcao != 12);
+
     }
 
     static void menu() {
@@ -24,5 +63,6 @@ public class Main {
         System.out.println("* 11 - exportar o grafo para um arquivo de texto    *");
         System.out.println("* 12 - Sair                                         *");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        System.out.print("Escolha uma opcao: ");
     }
 }
