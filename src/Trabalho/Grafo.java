@@ -96,6 +96,23 @@ public class Grafo {
         }
     }
 
+    public void editarCoordenada(int vertice, int x, int y) {
+        if (vertice < 0 || vertice >= numVertices) {
+            System.out.println("Vértice não existe!");
+        } else if (x < 0 || x > 100 || y < 0 || y > 100) {
+            System.out.println("Coordenada inválida! Informe valores de 0 a 100");
+        } else {
+            matCoor[vertice][0] = x;
+            matCoor[vertice][1] = y;
+
+            //teste
+            for (int i = 0; i < numVertices; i++) {
+                System.out.println(i + " " + matCoor[i][0] + " " + matCoor[i][1]);
+            }
+
+            System.out.println("Coordenada atualizada com sucesso!");
+        }
+    }
     private boolean verificaPosicao(int origem, int destino) {
         return (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices);
     }

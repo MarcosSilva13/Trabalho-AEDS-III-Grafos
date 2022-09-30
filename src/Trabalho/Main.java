@@ -39,6 +39,13 @@ public class Main {
                     grafo.removerAresta(origem, destino);
                     break;
                 case 7:
+                    System.out.print("Informe o vértice: ");
+                    int vertice = scan.nextInt();
+                    System.out.print("Informe a nova coordenada X: ");
+                    int x = scan.nextInt();
+                    System.out.print("Informe a nova coordenada Y: ");
+                    int y = scan.nextInt();
+                    grafo.editarCoordenada(vertice,x,y);
                     break;
                 case 8:
                     break;
