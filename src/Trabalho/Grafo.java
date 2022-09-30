@@ -14,6 +14,11 @@ public class Grafo {
     private int coluna;
     private int peso;
     private String direcionado;
+    private boolean importado = false;
+
+    public boolean isImportado() {
+        return this.importado;
+    }
 
     public void importar() {
         try {
@@ -34,18 +39,22 @@ public class Grafo {
             numArestas = Integer.parseInt(br.readLine());
 
             if (verificaDirecionado()) {
-                criaDirecionado();
+                importado = criaDirecionado();
             } else {
-                criaNaoDirecionado();
+                importado = criaNaoDirecionado();
             }
+
+            if (importado) System.out.println("Grafo importado com sucesso!");
+            else System.out.println("Não foi possível importar o grafo!");
+
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
 
     public void inserirAresta(int origem, int destino, int p) {
         if (p >= 0) { //mudar para > 0 caso não possa add peso zero
-            if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices) {
+            if (verificaPosicao(origem, destino)) {
                 System.out.println("Posição inválida!\n");
             } else if (matGrafo[origem][destino] != -1) {
                 System.out.println("Posição já ocupada!\n");
@@ -67,7 +76,31 @@ public class Grafo {
         }
     }
 
-    private void criaNaoDirecionado() {
+    public void removerAresta(int origem, int destino) {
+        if (verificaPosicao(origem, destino)) {
+            System.out.println("Posição inválida!\n");
+        } else if (matGrafo[origem][destino] == -1) {
+            System.out.println("Posição está vazia!\n");
+        } else if (verificaDirecionado()) {
+            matGrafo[origem][destino] = -1;
+            numArestas--;
+            System.out.println("Aresta removida com sucesso!\n");
+            testeImprimir(); //remover depois
+        } else {
+            matGrafo[origem][destino] = -1;
+            matGrafo[destino][origem] = -1;
+            //numArestas-= 2; usar só se for salvar a matriz espelhada
+            numArestas--;
+            System.out.println("Aresta removida com sucesso!\n");
+            testeImprimir(); //remover depois
+        }
+    }
+
+    private boolean verificaPosicao(int origem, int destino) {
+        return (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices);
+    }
+
+    private boolean criaNaoDirecionado() {
         inicializaMatriz();
         try {
             for (int i = 0; i < numVertices; i++) {
@@ -79,7 +112,7 @@ public class Grafo {
                 matGrafo[coluna][linha] = peso;
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            return false;
         }
 
         //testes
@@ -92,9 +125,10 @@ public class Grafo {
         }
 
         testeImprimir();
+        return true;
     }
 
-    private void criaDirecionado() {
+    private boolean criaDirecionado() {
         inicializaMatriz();
         try {
             for (int i = 0; i < numVertices; i++) {
@@ -105,7 +139,8 @@ public class Grafo {
                 matGrafo[linha][coluna] = peso;
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
+            return false;
         }
 
         //testes
@@ -118,6 +153,7 @@ public class Grafo {
         }
 
         testeImprimir();
+        return true;
     }
 
     public void exportar() {
@@ -150,8 +186,9 @@ public class Grafo {
                 }
             }
             bw.close();
+            System.out.println("Grafo exportado com sucesso!");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
 

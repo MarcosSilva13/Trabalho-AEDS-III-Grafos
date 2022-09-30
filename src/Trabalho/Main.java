@@ -16,6 +16,7 @@ public class Main {
                     grafo.importar();
                     break;
                 case 2:
+                    //usuario vai criar as coordenadas também ??
                     break;
                 case 3:
                     break;
@@ -28,9 +29,14 @@ public class Main {
                     destino = scan.nextInt();
                     System.out.print("Informe o peso: ");
                     peso = scan.nextInt();
-                    grafo.inserirAresta(origem,destino,peso);
+                    grafo.inserirAresta(origem, destino, peso);
                     break;
                 case 6:
+                    System.out.print("Informe a origem: ");
+                    origem = scan.nextInt();
+                    System.out.print("Informe o destino: ");
+                    destino = scan.nextInt();
+                    grafo.removerAresta(origem, destino);
                     break;
                 case 7:
                     break;
@@ -47,7 +53,7 @@ public class Main {
         } while (opcao != 12);
 
     }
-
+//para ter o controle de acesso dos menus é preciso trabalhar os booleans importado e criado
     static void menu() {
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println("* 1 - Importar um grafo                             *");
