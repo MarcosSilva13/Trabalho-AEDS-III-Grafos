@@ -1,0 +1,11 @@
+(OK) 1 - Importar um grafo
+() 2 - Criar um grafo vazio
+() 3 - Exibir as adjacências
+() 4 - Consultar se um vértice é adjacente a outro
+(OK) 5 - Inserir novas arestas
+(OK) 6 - Remover arestas
+(OK) 7 - Editar coordenada dos vértices
+() 8 - Consultar o primeiro adjacente de um vértice
+() 9 - Consultar o próximo adjacente de um vértice
+() 10 - Consultar a lista completa de adjacentes
+() 11 - exportar o grafo para um arquivo de texto
