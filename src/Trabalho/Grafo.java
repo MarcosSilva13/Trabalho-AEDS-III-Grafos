@@ -34,9 +34,9 @@ public class Grafo {
 
             /*for (int i = 0; i < this.numVertices; i++) {
                 System.out.println(matCoor[i][0] + " " + matCoor[i][1]);
-            }
+            }*/
             numArestas = Integer.parseInt(br.readLine());
-            System.out.println(this.numArestas);*/
+            //System.out.println(this.numArestas);
 
             if (verificaDirecionado()) {
                 criaDirecionado();
