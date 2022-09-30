@@ -52,6 +52,17 @@ public class Grafo {
         }
     }
 
+    public void exibirAdjacencias() {
+        System.out.println();
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                System.out.print(matGrafo[i][j] + "   ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
     public void inserirAresta(int origem, int destino, int p) {
         if (p >= 0) { //mudar para > 0 caso não possa add peso zero
             if (verificaPosicao(origem, destino)) {

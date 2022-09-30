@@ -19,6 +19,7 @@ public class Main {
                     //usuario vai criar as coordenadas também ??
                     break;
                 case 3:
+                    grafo.exibirAdjacencias();
                     break;
                 case 4:
                     break;
@@ -51,7 +52,7 @@ public class Main {
                     break;
                 case 9:
                     break;
-                case 10:
+                case 10://mostrar so a sequencia de algum vertice
                     break;
                 case 11:
                     grafo.exportar();
