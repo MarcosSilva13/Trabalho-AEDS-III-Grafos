@@ -70,6 +70,17 @@ public class Grafo {
         }
         return (matGrafo[origem][destino] != -1);
     }
+
+    public int primeiroAdjacenteDoVertice(int vertice) {
+        if (vertice >= 0 && vertice < numVertices) {
+            for (int i = 0; i < numVertices; i++) {
+                if (matGrafo[vertice][i] != -1) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
     public void inserirAresta(int origem, int destino, int p) {
         if (p >= 0) { //mudar para > 0 caso não possa add peso zero
             if (verificaPosicao(origem, destino)) {

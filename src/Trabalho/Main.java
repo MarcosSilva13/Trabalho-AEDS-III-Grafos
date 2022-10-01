@@ -1,14 +1,12 @@
 package Trabalho;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Grafo grafo = new Grafo();
-        int opcao, origem, destino, peso;
+        int opcao, origem, destino, peso, vertice, verticeAdj;
 
         do {
             menu();
@@ -49,7 +47,7 @@ public class Main {
                     break;
                 case 7:
                     System.out.print("Informe o vértice: ");
-                    int vertice = scan.nextInt();
+                    vertice = scan.nextInt();
                     System.out.print("Informe a nova coordenada X: ");
                     int x = scan.nextInt();
                     System.out.print("Informe a nova coordenada Y: ");
@@ -57,6 +55,11 @@ public class Main {
                     grafo.editarCoordenada(vertice,x,y);
                     break;
                 case 8:
+                    System.out.print("Informe o vértice: ");
+                    vertice = scan.nextInt();
+                    verticeAdj = grafo.primeiroAdjacenteDoVertice(vertice);
+                    if (verticeAdj != -1) System.out.println("O primeiro adjacente é: " + verticeAdj);
+                    else System.out.println("Não tem adjacente!");
                     break;
                 case 9:
                     break;
