@@ -1,5 +1,7 @@
 package Trabalho;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 
 public class Main {
@@ -22,6 +24,12 @@ public class Main {
                     grafo.exibirAdjacencias();
                     break;
                 case 4:
+                    System.out.print("Informe o vértice de origem: ");
+                    origem = scan.nextInt();
+                    System.out.print("Informe o vértice de destino: ");
+                    destino = scan.nextInt();
+                    if (grafo.consultarSeAdjacente(origem, destino)) System.out.println("É adjacente!\n");
+                    else System.out.println("Não é adjacente!\n");
                     break;
                 case 5:
                     System.out.print("Informe a origem: ");

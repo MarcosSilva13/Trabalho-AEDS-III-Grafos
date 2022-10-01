@@ -63,6 +63,13 @@ public class Grafo {
         System.out.println();
     }
 
+    public boolean consultarSeAdjacente(int origem, int destino) {
+        if (verificaPosicao(origem,destino)) {
+            System.out.println("Posição inválida!");
+            return false;
+        }
+        return (matGrafo[origem][destino] != -1);
+    }
     public void inserirAresta(int origem, int destino, int p) {
         if (p >= 0) { //mudar para > 0 caso não possa add peso zero
             if (verificaPosicao(origem, destino)) {
@@ -185,38 +192,42 @@ public class Grafo {
     }
 
     public void exportar() {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("novoGrafo.txt"));
-            bw.write(direcionado + "\n");
-            bw.write(numVertices + "\n");
+        if (importado) {
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter("novoGrafo.txt"));
+                bw.write(direcionado + "\n");
+                bw.write(numVertices + "\n");
 
-            for (int i = 0; i < numVertices; i++) {
-                bw.write(i + " " + matCoor[i][0] + " " + matCoor[i][1] + "\n");
-            }
-
-            bw.write(numArestas + "\n");
-
-            if (verificaDirecionado()) {
                 for (int i = 0; i < numVertices; i++) {
-                    for (int j = 0; j < numVertices; j++) {
-                        if (matGrafo[i][j] != -1) {
-                            bw.write(i + " " + j + " " + matGrafo[i][j] + "\n");
+                    bw.write(i + " " + matCoor[i][0] + " " + matCoor[i][1] + "\n");
+                }
+
+                bw.write(numArestas + "\n");
+
+                if (verificaDirecionado()) {
+                    for (int i = 0; i < numVertices; i++) {
+                        for (int j = 0; j < numVertices; j++) {
+                            if (matGrafo[i][j] != -1) {
+                                bw.write(i + " " + j + " " + matGrafo[i][j] + "\n");
+                            }
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < numVertices; i++) {
+                        for (int j = 0; j < numVertices; j++) {
+                            if ((matGrafo[i][j] != -1) && (j > i)) { // comparando para salvar so uma diagonal
+                                bw.write(i + " " + j + " " + matGrafo[i][j] + "\n");
+                            }
                         }
                     }
                 }
-            } else {
-                for (int i = 0; i < numVertices; i++) {
-                    for (int j = 0; j < numVertices; j++) {
-                        if ((matGrafo[i][j] != -1) && (j > i)) { // comparando para salvar so uma diagonal
-                            bw.write(i + " " + j + " " + matGrafo[i][j] + "\n");
-                        }
-                    }
-                }
+                bw.close();
+                System.out.println("Grafo exportado com sucesso!\n");
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
             }
-            bw.close();
-            System.out.println("Grafo exportado com sucesso!");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+        } else {
+            System.out.println("O grafo não foi importado!\n");
         }
     }
 
