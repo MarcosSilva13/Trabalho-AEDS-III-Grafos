@@ -6,7 +6,7 @@
 (OK) 6 - Remover arestas
 (OK) 7 - Editar coordenada dos vértices
 (OK) 8 - Consultar o primeiro adjacente de um vértice
-() 9 - Consultar o próximo adjacente de um vértice
+(OK) 9 - Consultar o próximo adjacente de um vértice
 () 10 - Consultar a lista completa de adjacentes
 (OK) 11 - exportar o grafo para um arquivo de texto
 
