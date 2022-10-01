@@ -44,8 +44,8 @@ public class Grafo {
                 importado = criaNaoDirecionado();
             }
 
-            if (importado) System.out.println("Grafo importado com sucesso!");
-            else System.out.println("Não foi possível importar o grafo!");
+            if (importado) System.out.println("Grafo importado com sucesso!\n");
+            else System.out.println("Não foi possível importar o grafo!\n");
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -55,8 +55,15 @@ public class Grafo {
     public void exibirAdjacencias() {
         System.out.println();
         for (int i = 0; i < numVertices; i++) {
+            System.out.print("   |" + i + "|");
+
+        }
+        System.out.println();
+
+        for (int i = 0; i < numVertices; i++) {
+            System.out.print("|" + i + "| ");
             for (int j = 0; j < numVertices; j++) {
-                System.out.print(matGrafo[i][j] + "   ");
+                System.out.print(matGrafo[i][j] + "    ");
             }
             System.out.println();
         }
@@ -71,30 +78,6 @@ public class Grafo {
         return (matGrafo[origem][destino] != -1);
     }
 
-    public int primeiroAdjacenteDoVertice(int vertice) {
-        if (vertice >= 0 && vertice < numVertices) {
-            for (int i = 0; i < numVertices; i++) {
-                if (matGrafo[vertice][i] != -1) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int proximoAdjacenteDoVertice(int vertice, int atual) {
-        if (vertice >= 0 && vertice < numVertices && atual >= 0 && atual < numVertices) {
-            if (matGrafo[vertice][atual] != -1) {
-                atual++;
-            }
-            for (int i = atual; i < numVertices; i++) {
-                if (matGrafo[vertice][i] != -1) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
     public void inserirAresta(int origem, int destino, int p) {
         if (p >= 0) { //mudar para > 0 caso não possa add peso zero
             if (verificaPosicao(origem, destino)) {
@@ -105,14 +88,12 @@ public class Grafo {
                 matGrafo[origem][destino] = p;
                 numArestas++;
                 System.out.println("Aresta inserida com sucesso!\n");
-                testeImprimir(); //remover depois
             } else {
                 matGrafo[origem][destino] = p;
                 matGrafo[destino][origem] = p;
                 //numArestas+= 2; usar só se for salvar a matriz espelhada
                 numArestas++;
                 System.out.println("Aresta inserida com sucesso!\n");
-                testeImprimir(); //remover depois
             }
         } else {
             System.out.println("Peso não pode ser negativo!\n");
@@ -128,92 +109,74 @@ public class Grafo {
             matGrafo[origem][destino] = -1;
             numArestas--;
             System.out.println("Aresta removida com sucesso!\n");
-            testeImprimir(); //remover depois
         } else {
             matGrafo[origem][destino] = -1;
             matGrafo[destino][origem] = -1;
             //numArestas-= 2; usar só se for salvar a matriz espelhada
             numArestas--;
             System.out.println("Aresta removida com sucesso!\n");
-            testeImprimir(); //remover depois
         }
     }
 
     public void editarCoordenada(int vertice, int x, int y) {
         if (vertice < 0 || vertice >= numVertices) {
-            System.out.println("Vértice não existe!");
+            System.out.println("Vértice não existe!\n");
         } else if (x < 0 || x > 100 || y < 0 || y > 100) {
-            System.out.println("Coordenada inválida! Informe valores de 0 a 100");
+            System.out.println("Coordenada inválida! Informe valores de 0 a 100\n");
         } else {
             matCoor[vertice][0] = x;
             matCoor[vertice][1] = y;
 
-            //teste
+            //REMOVER DEPOIS
             for (int i = 0; i < numVertices; i++) {
                 System.out.println(i + " " + matCoor[i][0] + " " + matCoor[i][1]);
             }
 
-            System.out.println("Coordenada atualizada com sucesso!");
+            System.out.println("Coordenada atualizada com sucesso!\n");
         }
     }
-    private boolean verificaPosicao(int origem, int destino) {
-        return (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices);
-    }
 
-    private boolean criaNaoDirecionado() {
-        inicializaMatriz();
-        try {
+    public int primeiroAdjacenteDoVertice(int vertice) {
+        if (vertice >= 0 && vertice < numVertices) {
             for (int i = 0; i < numVertices; i++) {
-                st = new StringTokenizer(br.readLine());
-                linha = Integer.parseInt(st.nextToken());
-                coluna = Integer.parseInt(st.nextToken());
-                peso = Integer.parseInt(st.nextToken());
-                matGrafo[linha][coluna] = peso;
-                matGrafo[coluna][linha] = peso;
-            }
-        } catch (IOException ex) {
-            return false;
-        }
-
-        //testes
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
-                if (matGrafo[i][j] != -1) {
-                    System.out.println(i + " " + j + " " + matGrafo[i][j]);
+                if (matGrafo[vertice][i] != -1) {
+                    return i;
                 }
             }
+        } else {
+            return -2;
         }
-
-        testeImprimir();
-        return true;
+        return -1;
     }
 
-    private boolean criaDirecionado() {
-        inicializaMatriz();
-        try {
-            for (int i = 0; i < numVertices; i++) {
-                st = new StringTokenizer(br.readLine());
-                linha = Integer.parseInt(st.nextToken());
-                coluna = Integer.parseInt(st.nextToken());
-                peso = Integer.parseInt(st.nextToken());
-                matGrafo[linha][coluna] = peso;
+    public int proximoAdjacenteDoVertice(int vertice, int atual) {
+        if (vertice >= 0 && vertice < numVertices && atual >= 0 && atual < numVertices) {
+            if (matGrafo[vertice][atual] != -1) {
+                atual++;
             }
-        } catch (IOException ex) {
-            //ex.printStackTrace();
-            return false;
-        }
-
-        //testes
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
-                if (matGrafo[i][j] != -1) {
-                    System.out.println(i + " " + j + " " + matGrafo[i][j]);
+            for (int i = atual; i < numVertices; i++) {
+                if (matGrafo[vertice][i] != -1) {
+                    return i;
                 }
             }
+        } else {
+            return -2;
         }
+        return -1;
+    }
 
-        testeImprimir();
-        return true;
+    public void listaCompletaDeAdjacentesDoVertice(int vertice) {
+        if (vertice >= 0 && vertice < numVertices) {
+            System.out.print("Vértice " + vertice + " adjacentes: ");
+            for (int i = 0; i < numVertices; i++) {
+                if (matGrafo[vertice][i] != -1) {
+                    System.out.print(i + "  ");
+                }
+            }
+            System.out.println("\n");
+        } else {
+            System.out.println("Vértice não existe!\n");
+        }
     }
 
     public void exportar() {
@@ -254,6 +217,42 @@ public class Grafo {
         } else {
             System.out.println("O grafo não foi importado!\n");
         }
+    }
+    private boolean verificaPosicao(int origem, int destino) {
+        return (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices);
+    }
+
+    private boolean criaNaoDirecionado() {
+        inicializaMatriz();
+        try {
+            for (int i = 0; i < numVertices; i++) {
+                st = new StringTokenizer(br.readLine());
+                linha = Integer.parseInt(st.nextToken());
+                coluna = Integer.parseInt(st.nextToken());
+                peso = Integer.parseInt(st.nextToken());
+                matGrafo[linha][coluna] = peso;
+                matGrafo[coluna][linha] = peso;
+            }
+        } catch (IOException ex) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean criaDirecionado() {
+        inicializaMatriz();
+        try {
+            for (int i = 0; i < numVertices; i++) {
+                st = new StringTokenizer(br.readLine());
+                linha = Integer.parseInt(st.nextToken());
+                coluna = Integer.parseInt(st.nextToken());
+                peso = Integer.parseInt(st.nextToken());
+                matGrafo[linha][coluna] = peso;
+            }
+        } catch (IOException ex) {
+            return false;
+        }
+        return true;
     }
 
     private void inicializaMatriz() { //usar só se o peso puder ser zero

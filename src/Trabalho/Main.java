@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Grafo grafo = new Grafo();
-        int opcao, origem, destino, peso, vertice, verticeAdj;
+        int opcao, vtOrigem, vtDestino, peso, verticeAdj;
 
         do {
             menu();
@@ -22,56 +22,69 @@ public class Main {
                     break;
                 case 4:
                     System.out.print("Informe o vértice de origem: ");
-                    origem = scan.nextInt();
+                    vtOrigem = scan.nextInt();
                     System.out.print("Informe o vértice de destino: ");
-                    destino = scan.nextInt();
-                    if (grafo.consultarSeAdjacente(origem, destino)) System.out.println("É adjacente!\n");
+                    vtDestino = scan.nextInt();
+                    if (grafo.consultarSeAdjacente(vtOrigem, vtDestino)) System.out.println("É adjacente!\n");
                     else System.out.println("Não é adjacente!\n");
                     break;
                 case 5:
                     System.out.print("Informe a origem: ");
-                    origem = scan.nextInt();
+                    vtOrigem = scan.nextInt();
                     System.out.print("Informe o destino: ");
-                    destino = scan.nextInt();
+                    vtDestino = scan.nextInt();
                     System.out.print("Informe o peso: ");
                     peso = scan.nextInt();
-                    grafo.inserirAresta(origem, destino, peso);
+                    grafo.inserirAresta(vtOrigem, vtDestino, peso);
                     break;
                 case 6:
                     System.out.print("Informe a origem: ");
-                    origem = scan.nextInt();
+                    vtOrigem = scan.nextInt();
                     System.out.print("Informe o destino: ");
-                    destino = scan.nextInt();
-                    grafo.removerAresta(origem, destino);
+                    vtDestino = scan.nextInt();
+                    grafo.removerAresta(vtOrigem, vtDestino);
                     break;
                 case 7:
                     System.out.print("Informe o vértice: ");
-                    vertice = scan.nextInt();
+                    vtOrigem = scan.nextInt();
                     System.out.print("Informe a nova coordenada X: ");
                     int x = scan.nextInt();
                     System.out.print("Informe a nova coordenada Y: ");
                     int y = scan.nextInt();
-                    grafo.editarCoordenada(vertice,x,y);
+                    grafo.editarCoordenada(vtOrigem,x,y);
                     break;
                 case 8:
                     System.out.print("Informe o vértice: ");
-                    vertice = scan.nextInt();
-                    verticeAdj = grafo.primeiroAdjacenteDoVertice(vertice);
-                    if (verticeAdj != -1) System.out.println("O primeiro adjacente do vértice: " +
-                            vertice + " é: " + verticeAdj);
-                    else System.out.println("O vértice " + vertice + " não tem adjacente!");
+                    vtOrigem = scan.nextInt();
+                    verticeAdj = grafo.primeiroAdjacenteDoVertice(vtOrigem);
+                    if (verticeAdj >= 0) {
+                        System.out.println("O primeiro adjacente do vértice: " +
+                        vtOrigem + " é: " + verticeAdj + "\n");
+                    } else if (verticeAdj == -1){
+                        System.out.println("O vértice " + vtOrigem + " não tem adjacente!\n");
+                    } else {
+                        System.out.println("Vértice não existe!\n");
+                    }
                     break;
                 case 9:
                     System.out.print("Informe o vértice: ");
-                    vertice = scan.nextInt();
+                    vtOrigem = scan.nextInt();
                     System.out.print("Informe o vértice atual: ");
                     int atual = scan.nextInt();
-                    verticeAdj = grafo.proximoAdjacenteDoVertice(vertice,atual);
-                    if (verticeAdj != -1) System.out.println("O proximo adjacente do vértice " +
-                            vertice + " iniciando no " + "vértice: " + atual + " é: " + verticeAdj);
-                    else System.out.println("O vértice atual " + atual + " não tem adjacente!");
+                    verticeAdj = grafo.proximoAdjacenteDoVertice(vtOrigem,atual);
+                    if (verticeAdj >= 0) {
+                        System.out.println("O proximo adjacente do vértice " +
+                        vtOrigem + " iniciando no " + "vértice: " + atual + " é: " + verticeAdj + "\n");
+                    } else if (verticeAdj == -1){
+                        System.out.println("O vértice atual " + atual + " não tem adjacente!\n");
+                    } else {
+                        System.out.println("Vértice não existe!\n");
+                    }
                     break;
-                case 10://mostrar so a sequencia de algum vertice
+                case 10:
+                    System.out.print("Informe o vértice: ");
+                    vtOrigem = scan.nextInt();
+                    grafo.listaCompletaDeAdjacentesDoVertice(vtOrigem);
                     break;
                 case 11:
                     grafo.exportar();
