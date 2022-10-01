@@ -5,7 +5,13 @@
 (OK) 5 - Inserir novas arestas
 (OK) 6 - Remover arestas
 (OK) 7 - Editar coordenada dos vértices
-() 8 - Consultar o primeiro adjacente de um vértice
+(OK) 8 - Consultar o primeiro adjacente de um vértice
 () 9 - Consultar o próximo adjacente de um vértice
 () 10 - Consultar a lista completa de adjacentes
 (OK) 11 - exportar o grafo para um arquivo de texto
+
+duvidas
+1 - Quando for criar um novo grafo é para o usuário preencher as coordenadas também ?
+2 - O peso de uma aresta pode ser zero ?
+3 - A matriz pode ser considerada vazia com zeros ?
+4 - É pra exibir as adjacencias em forma de matriz ou na forma que é para exportar ?
