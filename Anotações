@@ -1,7 +1,7 @@
 (OK) 1 - Importar um grafo
 () 2 - Criar um grafo vazio
 (OK) 3 - Exibir as adjacências
-() 4 - Consultar se um vértice é adjacente a outro
+(OK) 4 - Consultar se um vértice é adjacente a outro
 (OK) 5 - Inserir novas arestas
 (OK) 6 - Remover arestas
 (OK) 7 - Editar coordenada dos vértices
