@@ -81,6 +81,20 @@ public class Grafo {
         }
         return -1;
     }
+
+    public int proximoAdjacenteDoVertice(int vertice, int atual) {
+        if (vertice >= 0 && vertice < numVertices && atual >= 0 && atual < numVertices) {
+            if (matGrafo[vertice][atual] != -1) {
+                atual++;
+            }
+            for (int i = atual; i < numVertices; i++) {
+                if (matGrafo[vertice][i] != -1) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
     public void inserirAresta(int origem, int destino, int p) {
         if (p >= 0) { //mudar para > 0 caso não possa add peso zero
             if (verificaPosicao(origem, destino)) {

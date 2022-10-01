@@ -16,7 +16,6 @@ public class Main {
                     grafo.importar();
                     break;
                 case 2:
-                    //usuario vai criar as coordenadas também ??
                     break;
                 case 3:
                     grafo.exibirAdjacencias();
@@ -58,10 +57,19 @@ public class Main {
                     System.out.print("Informe o vértice: ");
                     vertice = scan.nextInt();
                     verticeAdj = grafo.primeiroAdjacenteDoVertice(vertice);
-                    if (verticeAdj != -1) System.out.println("O primeiro adjacente é: " + verticeAdj);
-                    else System.out.println("Não tem adjacente!");
+                    if (verticeAdj != -1) System.out.println("O primeiro adjacente do vértice: " +
+                            vertice + " é: " + verticeAdj);
+                    else System.out.println("O vértice " + vertice + " não tem adjacente!");
                     break;
                 case 9:
+                    System.out.print("Informe o vértice: ");
+                    vertice = scan.nextInt();
+                    System.out.print("Informe o vértice atual: ");
+                    int atual = scan.nextInt();
+                    verticeAdj = grafo.proximoAdjacenteDoVertice(vertice,atual);
+                    if (verticeAdj != -1) System.out.println("O proximo adjacente do vértice " +
+                            vertice + " iniciando no " + "vértice: " + atual + " é: " + verticeAdj);
+                    else System.out.println("O vértice atual " + atual + " não tem adjacente!");
                     break;
                 case 10://mostrar so a sequencia de algum vertice
                     break;
