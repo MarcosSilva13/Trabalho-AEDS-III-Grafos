@@ -16,6 +16,7 @@ public class Main {
                     grafo.importar();
                     break;
                 case 2:
+                    grafo.criaGrafoVazio(10, true);
                     break;
                 case 3:
                     grafo.exibirAdjacencias();

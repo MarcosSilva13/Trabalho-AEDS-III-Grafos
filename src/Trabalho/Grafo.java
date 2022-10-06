@@ -1,6 +1,7 @@
 package Trabalho;
 
 import java.io.*;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 public class Grafo {
@@ -14,13 +15,14 @@ public class Grafo {
     private int coluna;
     private int peso;
     private String direcionado;
-    private boolean importado = false;
+    private boolean importado, criado;
 
     public boolean isImportado() {
         return this.importado;
     }
 
     public void importar() {
+        criado = false;
         try {
             br = new BufferedReader(new FileReader("grafo.txt"));
             direcionado = br.readLine();
@@ -44,12 +46,34 @@ public class Grafo {
                 importado = criaNaoDirecionado();
             }
 
-            if (importado) System.out.println("Grafo importado com sucesso!\n");
-            else System.out.println("Não foi possível importar o grafo!\n");
-
+            if (importado) {
+                System.out.println("Grafo importado com sucesso!\n");
+            } else {
+                System.out.println("Não foi possível importar o grafo!\n");
+            }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void criaGrafoVazio(int numVertices, boolean tipoGrafo) {
+        importado = false;
+        if (tipoGrafo) {
+            direcionado = "direcionado=sim";
+        } else {
+            direcionado = "direcionado=nao";
+        }
+
+        this.numVertices = numVertices;
+        this.numArestas = 0;
+        matCoor = new int[this.numVertices][2];
+        preencheMatCoor();
+
+        matGrafo = new int[this.numVertices][this.numVertices];
+        inicializaMatriz();
+
+        criado = true;
+        System.out.println("Grafo criado com sucesso!");
     }
 
     public void exibirAdjacencias() {
@@ -178,7 +202,7 @@ public class Grafo {
     }
 
     public void exportar() {
-        if (importado) {
+        if (importado || criado) {
             try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter("novoGrafo.txt"));
                 bw.write(direcionado + "\n");
@@ -213,11 +237,24 @@ public class Grafo {
                 System.out.println(ex.getMessage());
             }
         } else {
-            System.out.println("O grafo não foi importado!\n");
+            System.out.println("Não foi possível exportar o grafo!\n");
         }
     }
     private boolean verificaPosicao(int origem, int destino) {
         return (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices);
+    }
+
+    private void preencheMatCoor() {
+        Random random = new Random();
+        for (int i = 0; i < numVertices; i++) {
+            matCoor[i][0] = random.nextInt(0,101);
+            matCoor[i][1] = random.nextInt(0,101);
+        }
+
+        //APENAS PARA TESTE
+        for (int i = 0; i < numVertices; i++) {
+            System.out.print(i + " " + matCoor[i][0] + " " + matCoor[i][1] + "\n");
+        }
     }
 
     private boolean criaNaoDirecionado() {
