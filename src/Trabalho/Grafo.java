@@ -79,7 +79,7 @@ public class Grafo {
     }
 
     public void inserirAresta(int origem, int destino, int p) {
-        if (p >= 0) { //mudar para > 0 caso não possa add peso zero
+        if (p >= 0) {
             if (verificaPosicao(origem, destino)) {
                 System.out.println("Posição inválida!\n");
             } else if (matGrafo[origem][destino] != -1) {
@@ -91,7 +91,6 @@ public class Grafo {
             } else {
                 matGrafo[origem][destino] = p;
                 matGrafo[destino][origem] = p;
-                //numArestas+= 2; usar só se for salvar a matriz espelhada
                 numArestas++;
                 System.out.println("Aresta inserida com sucesso!\n");
             }
@@ -112,7 +111,6 @@ public class Grafo {
         } else {
             matGrafo[origem][destino] = -1;
             matGrafo[destino][origem] = -1;
-            //numArestas-= 2; usar só se for salvar a matriz espelhada
             numArestas--;
             System.out.println("Aresta removida com sucesso!\n");
         }
@@ -255,7 +253,7 @@ public class Grafo {
         return true;
     }
 
-    private void inicializaMatriz() { //usar só se o peso puder ser zero
+    private void inicializaMatriz() {
         matGrafo = new int[numVertices][numVertices];
 
         for (int i = 0; i < numVertices; i++) {
@@ -267,20 +265,5 @@ public class Grafo {
 
     private boolean verificaDirecionado() {
         return (direcionado.equals("direcionado=sim"));
-    }
-
-    private void testeImprimir() { // apagar depois pois é so para testar a matriz
-        for (int i = 0; i < numVertices; i++) {
-            System.out.print("   " + i + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < numVertices; i++) {
-            System.out.print(i + "| ");
-            for (int j = 0; j < numVertices; j++) {
-
-                System.out.print(matGrafo[i][j] + "   ");
-            }
-            System.out.println();
-        }
     }
 }
