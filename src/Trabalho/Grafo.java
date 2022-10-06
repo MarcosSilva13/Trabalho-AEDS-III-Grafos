@@ -1,4 +1,4 @@
-package Trabalho;
+package trabalho;
 
 import java.io.*;
 import java.util.Random;
@@ -16,10 +16,6 @@ public class Grafo {
     private int peso;
     private String direcionado;
     private boolean importado, criado;
-
-    public boolean isImportado() {
-        return this.importado;
-    }
 
     public void importar() {
         criado = false;
@@ -57,23 +53,27 @@ public class Grafo {
     }
 
     public void criaGrafoVazio(int numVertices, boolean tipoGrafo) {
-        importado = false;
-        if (tipoGrafo) {
-            direcionado = "direcionado=sim";
+        if (numVertices > 0) {
+            importado = false;
+            if (tipoGrafo) {
+                direcionado = "direcionado=sim";
+            } else {
+                direcionado = "direcionado=nao";
+            }
+
+            this.numVertices = numVertices;
+            this.numArestas = 0;
+            matCoor = new int[this.numVertices][2];
+            preencheMatCoor();
+
+            matGrafo = new int[this.numVertices][this.numVertices];
+            inicializaMatriz();
+
+            criado = true;
+            System.out.println("Grafo criado com sucesso!\n");
         } else {
-            direcionado = "direcionado=nao";
+            System.out.println("Valor inválido para criar o grafo!\n");
         }
-
-        this.numVertices = numVertices;
-        this.numArestas = 0;
-        matCoor = new int[this.numVertices][2];
-        preencheMatCoor();
-
-        matGrafo = new int[this.numVertices][this.numVertices];
-        inicializaMatriz();
-
-        criado = true;
-        System.out.println("Grafo criado com sucesso!");
     }
 
     public void exibirAdjacencias() {
