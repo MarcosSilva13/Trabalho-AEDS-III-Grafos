@@ -1,4 +1,4 @@
-package Trabalho;
+package trabalho;
 
 import java.util.Scanner;
 
@@ -16,7 +16,11 @@ public class Main {
                     grafo.importar();
                     break;
                 case 2:
-                    grafo.criaGrafoVazio(10, true);
+                    System.out.print("Informe a quantidade de vértices: ");
+                    int numVertices = scan.nextInt();
+                    System.out.print("1 - Direcionado\n2 - Não direcionado\nEscolha o tipo do grafo: ");
+                    int tipo = scan.nextInt();
+                    grafo.criaGrafoVazio(numVertices, (tipo == 1));
                     break;
                 case 3:
                     grafo.exibirAdjacencias();
@@ -94,7 +98,6 @@ public class Main {
         } while (opcao != 12);
 
     }
-//para ter o controle de acesso dos menus é preciso trabalhar os booleans importado e criado
     static void menu() {
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.println("* 1 - Importar um grafo                             *");
