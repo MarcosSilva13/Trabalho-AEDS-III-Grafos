@@ -20,24 +20,25 @@ public class Grafo {
     public void importar() {
         criado = false;
         try {
-            br = new BufferedReader(new FileReader("grafo.txt"));
+            br = new BufferedReader(new FileReader("grafoteste.txt"));
             direcionado = br.readLine();
             numVertices = Integer.parseInt(br.readLine());
 
             matCoor = new int[numVertices][2];
 
             for (int i = 0; i < this.numVertices; i++) {
-                st = new StringTokenizer(br.readLine());
+                st = new StringTokenizer(br.readLine()); //recebe uma linha do arquivo e separa os valores dos espaços
                 int indice = Integer.parseInt(st.nextToken());
                 linha = Integer.parseInt(st.nextToken());
                 coluna = Integer.parseInt(st.nextToken());
                 matCoor[i][0] = linha;
                 matCoor[i][1] = coluna;
             }
+
             numArestas = Integer.parseInt(br.readLine());
 
-            if (verificaDirecionado()) {
-                importado = criaDirecionado();
+            if (verificaDirecionado()) { // verifica se o grafo é direcionado ou nao
+                importado = criaDirecionado(); // retorna se o grafo foi importado ou não
             } else {
                 importado = criaNaoDirecionado();
             }
@@ -99,11 +100,11 @@ public class Grafo {
             System.out.println("Posição inválida!");
             return false;
         }
-        return (matGrafo[origem][destino] != -1);
+        return (matGrafo[origem][destino] != -1); // retorna true se for adjacente
     }
 
     public void inserirAresta(int origem, int destino, int p) {
-        if (p >= 0) {
+        if (p >= 0) { // não permite o peso ser negativo
             if (verificaPosicao(origem, destino)) {
                 System.out.println("Posição inválida!\n");
             } else if (matGrafo[origem][destino] != -1) {
@@ -112,7 +113,7 @@ public class Grafo {
                 matGrafo[origem][destino] = p;
                 numArestas++;
                 System.out.println("Aresta inserida com sucesso!\n");
-            } else {
+            } else { // não direcionado
                 matGrafo[origem][destino] = p;
                 matGrafo[destino][origem] = p;
                 numArestas++;
@@ -132,7 +133,7 @@ public class Grafo {
             matGrafo[origem][destino] = -1;
             numArestas--;
             System.out.println("Aresta removida com sucesso!\n");
-        } else {
+        } else { // não direcionado
             matGrafo[origem][destino] = -1;
             matGrafo[destino][origem] = -1;
             numArestas--;
@@ -149,7 +150,6 @@ public class Grafo {
             matCoor[vertice][0] = x;
             matCoor[vertice][1] = y;
 
-            //REMOVER DEPOIS
             for (int i = 0; i < numVertices; i++) {
                 System.out.println(i + " " + matCoor[i][0] + " " + matCoor[i][1]);
             }
@@ -162,29 +162,29 @@ public class Grafo {
         if (vertice >= 0 && vertice < numVertices) {
             for (int i = 0; i < numVertices; i++) {
                 if (matGrafo[vertice][i] != -1) {
-                    return i;
+                    return i; // retorna o vertice adjacente
                 }
             }
         } else {
-            return -2;
+            return -2; // retorno caso o vertice não exista
         }
-        return -1;
+        return -1; // retorno caso não seja adjacente
     }
 
     public int proximoAdjacenteDoVertice(int vertice, int atual) {
         if (vertice >= 0 && vertice < numVertices && atual >= 0 && atual < numVertices) {
-            if (matGrafo[vertice][atual] != -1) {
+            if (matGrafo[vertice][atual] != -1) { // caso o vertice atual já tenha valor, avança 1 vertice
                 atual++;
             }
             for (int i = atual; i < numVertices; i++) {
                 if (matGrafo[vertice][i] != -1) {
-                    return i;
+                    return i; // retorna o vertice adjacente
                 }
             }
         } else {
-            return -2;
+            return -2; // retorno caso o vertice não exista
         }
-        return -1;
+        return -1; // retorno caso não seja adjacente
     }
 
     public void listaCompletaDeAdjacentesDoVertice(int vertice) {
@@ -202,7 +202,7 @@ public class Grafo {
     }
 
     public void exportar() {
-        if (importado || criado) {
+        if (importado || criado) { // so realiza a exportação se o grafo foi importado ou criado
             try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter("novoGrafo.txt"));
                 bw.write(direcionado + "\n");
@@ -214,7 +214,7 @@ public class Grafo {
 
                 bw.write(numArestas + "\n");
 
-                if (verificaDirecionado()) {
+                if (verificaDirecionado()) { // exporta direcionado
                     for (int i = 0; i < numVertices; i++) {
                         for (int j = 0; j < numVertices; j++) {
                             if (matGrafo[i][j] != -1) {
@@ -222,10 +222,10 @@ public class Grafo {
                             }
                         }
                     }
-                } else {
+                } else { // exporta não direcionado
                     for (int i = 0; i < numVertices; i++) {
                         for (int j = 0; j < numVertices; j++) {
-                            if ((matGrafo[i][j] != -1) && (j > i)) { // comparando para salvar so uma diagonal
+                            if ((matGrafo[i][j] != -1) && (j > i)) { // sendo não direcionado, exporta só a diagonal superior
                                 bw.write(i + " " + j + " " + matGrafo[i][j] + "\n");
                             }
                         }

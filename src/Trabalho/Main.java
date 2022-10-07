@@ -30,8 +30,10 @@ public class Main {
                     vtOrigem = scan.nextInt();
                     System.out.print("Informe o vértice de destino: ");
                     vtDestino = scan.nextInt();
-                    if (grafo.consultarSeAdjacente(vtOrigem, vtDestino)) System.out.println("É adjacente!\n");
-                    else System.out.println("Não é adjacente!\n");
+                    if (grafo.consultarSeAdjacente(vtOrigem, vtDestino))
+                        System.out.println("É adjacente!\n");
+                    else
+                        System.out.println("Não é adjacente!\n");
                     break;
                 case 5:
                     System.out.print("Informe a origem: ");
