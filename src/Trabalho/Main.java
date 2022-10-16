@@ -52,6 +52,7 @@ public class Main {
                     grafo.removerAresta(vtOrigem, vtDestino);
                     break;
                 case 7:
+                    grafo.exibirMatCoor();
                     System.out.print("Informe o vértice: ");
                     vtOrigem = scan.nextInt();
                     System.out.print("Informe a nova coordenada X: ");

@@ -149,11 +149,7 @@ public class Grafo {
         } else {
             matCoor[vertice][0] = x;
             matCoor[vertice][1] = y;
-
-            for (int i = 0; i < numVertices; i++) {
-                System.out.println(i + " " + matCoor[i][0] + " " + matCoor[i][1]);
-            }
-
+            exibirMatCoor();
             System.out.println("Coordenada atualizada com sucesso!\n");
         }
     }
@@ -240,6 +236,13 @@ public class Grafo {
             System.out.println("Não foi possível exportar o grafo!\n");
         }
     }
+
+    public void exibirMatCoor() {
+        for (int i = 0; i < numVertices; i++) {
+            System.out.print(i + " " + matCoor[i][0] + " " + matCoor[i][1] + "\n");
+        }
+        System.out.println();
+    }
     private boolean verificaPosicao(int origem, int destino) {
         return (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices);
     }
@@ -249,11 +252,6 @@ public class Grafo {
         for (int i = 0; i < numVertices; i++) {
             matCoor[i][0] = random.nextInt(0,101);
             matCoor[i][1] = random.nextInt(0,101);
-        }
-
-        //APENAS PARA TESTE
-        for (int i = 0; i < numVertices; i++) {
-            System.out.print(i + " " + matCoor[i][0] + " " + matCoor[i][1] + "\n");
         }
     }
 
