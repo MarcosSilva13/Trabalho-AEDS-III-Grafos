@@ -1,4 +1,4 @@
-package trabalho;
+package Trabalho;
 
 import java.io.*;
 import java.util.Random;
@@ -20,7 +20,7 @@ public class Grafo {
     public void importar() {
         criado = false;
         try {
-            br = new BufferedReader(new FileReader("grafoteste.txt"));
+            br = new BufferedReader(new FileReader("grafo.txt"));
             direcionado = br.readLine();
             numVertices = Integer.parseInt(br.readLine());
 
@@ -200,7 +200,7 @@ public class Grafo {
     public void exportar() {
         if (importado || criado) { // so realiza a exportação se o grafo foi importado ou criado
             try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter("novoGrafo.txt"));
+                BufferedWriter bw = new BufferedWriter(new FileWriter("grafo.txt"));
                 bw.write(direcionado + "\n");
                 bw.write(numVertices + "\n");
 
@@ -221,7 +221,7 @@ public class Grafo {
                 } else { // exporta não direcionado
                     for (int i = 0; i < numVertices; i++) {
                         for (int j = 0; j < numVertices; j++) {
-                            if ((matGrafo[i][j] != -1) && (j > i)) { // sendo não direcionado, exporta só a diagonal superior
+                            if ((matGrafo[i][j] != -1) && (j >= i)) { // sendo não direcionado, exporta só a diagonal superior
                                 bw.write(i + " " + j + " " + matGrafo[i][j] + "\n");
                             }
                         }
@@ -258,7 +258,7 @@ public class Grafo {
     private boolean criaNaoDirecionado() {
         inicializaMatriz();
         try {
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numArestas; i++) {
                 st = new StringTokenizer(br.readLine());
                 linha = Integer.parseInt(st.nextToken());
                 coluna = Integer.parseInt(st.nextToken());
@@ -275,7 +275,7 @@ public class Grafo {
     private boolean criaDirecionado() {
         inicializaMatriz();
         try {
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numArestas; i++) {
                 st = new StringTokenizer(br.readLine());
                 linha = Integer.parseInt(st.nextToken());
                 coluna = Integer.parseInt(st.nextToken());

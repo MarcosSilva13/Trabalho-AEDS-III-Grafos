@@ -1,4 +1,4 @@
-package trabalho;
+package Trabalho;
 
 import java.util.Scanner;
 
@@ -30,10 +30,11 @@ public class Main {
                     vtOrigem = scan.nextInt();
                     System.out.print("Informe o vértice de destino: ");
                     vtDestino = scan.nextInt();
-                    if (grafo.consultarSeAdjacente(vtOrigem, vtDestino))
+                    if (grafo.consultarSeAdjacente(vtOrigem, vtDestino)){
                         System.out.println("É adjacente!\n");
-                    else
+                    } else {
                         System.out.println("Não é adjacente!\n");
+                    }
                     break;
                 case 5:
                     System.out.print("Informe a origem: ");
@@ -99,7 +100,6 @@ public class Main {
                     break;
             }
         } while (opcao != 12);
-
     }
     static void menu() {
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
