@@ -26,7 +26,7 @@ public class Grafo {
 
             matCoor = new int[numVertices][2];
 
-            for (int i = 0; i < this.numVertices; i++) {
+            for (int i = 0; i < numVertices; i++) {
                 st = new StringTokenizer(br.readLine()); //recebe uma linha do arquivo e separa os valores dos espaços
                 int indice = Integer.parseInt(st.nextToken());
                 linha = Integer.parseInt(st.nextToken());
