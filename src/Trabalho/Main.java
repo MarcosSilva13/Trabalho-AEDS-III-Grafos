@@ -63,6 +63,12 @@ public class Main {
                     grafo.editarCoordenada(vtOrigem,x,y);
                     break;
                 case 8:
+                    grafo.exibirMatCoor();
+                    System.out.println("Informe o vértice: ");
+                    vtOrigem = scan.nextInt();
+                    grafo.editarNomeVertice(vtOrigem);
+                    break;
+                case 9:
                     System.out.print("Informe o vértice: ");
                     vtOrigem = scan.nextInt();
                     verticeAdj = grafo.primeiroAdjacenteDoVertice(vtOrigem);
@@ -75,7 +81,7 @@ public class Main {
                         System.out.println("Vértice não existe!\n");
                     }
                     break;
-                case 9:
+                case 10:
                     System.out.print("Informe o vértice: ");
                     vtOrigem = scan.nextInt();
                     System.out.print("Informe o vértice atual: ");
@@ -90,16 +96,16 @@ public class Main {
                         System.out.println("Vértice não existe!\n");
                     }
                     break;
-                case 10:
+                case 11:
                     System.out.print("Informe o vértice: ");
                     vtOrigem = scan.nextInt();
                     grafo.listaCompletaDeAdjacentesDoVertice(vtOrigem);
                     break;
-                case 11:
+                case 12:
                     grafo.exportar();
                     break;
             }
-        } while (opcao != 12);
+        } while (opcao != 13);
     }
     static void menu() {
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
@@ -110,11 +116,12 @@ public class Main {
         System.out.println("* 5 - Inserir novas arestas                         *");
         System.out.println("* 6 - Remover arestas                               *");
         System.out.println("* 7 - Editar coordenada dos vértices                *");
-        System.out.println("* 8 - Consultar o primeiro adjacente de um vértice  *");
-        System.out.println("* 9 - Consultar o próximo adjacente de um vértice   *");
-        System.out.println("* 10 - Consultar a lista completa de adjacentes     *");
-        System.out.println("* 11 - exportar o grafo para um arquivo de texto    *");
-        System.out.println("* 12 - Sair                                         *");
+        System.out.println("* 8 - Editar nome dos vértices                      *");
+        System.out.println("* 9 - Consultar o primeiro adjacente de um vértice  *");
+        System.out.println("* 10 - Consultar o próximo adjacente de um vértice   *");
+        System.out.println("* 11 - Consultar a lista completa de adjacentes     *");
+        System.out.println("* 12 - exportar o grafo para um arquivo de texto    *");
+        System.out.println("* 13 - Sair                                         *");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.print("Escolha uma opcao: ");
     }

@@ -82,7 +82,9 @@ public class Grafo {
             this.numVertices = numVertices;
             this.numArestas = 0;
             matCoor = new int[this.numVertices][2];
+            //iniciar nomevertice
             preencheMatCoor();
+            //preenchernomevertice digitando
 
             matGrafo = new int[this.numVertices][this.numVertices];
             inicializaMatriz();
@@ -168,6 +170,22 @@ public class Grafo {
             matCoor[vertice][1] = y;
             exibirMatCoor();
             System.out.println("Coordenada atualizada com sucesso!\n");
+        }
+    }
+
+    public void editarNomeVertice(int vertice) {
+        Scanner ler = new Scanner(System.in);
+        System.out.println("Informe o novo nome do vértice: ");
+        String nome = ler.nextLine().trim();
+
+        if (vertice < 0 || vertice >= numVertices) {
+            System.out.println("Vértice não existe!\n");
+        } else if (nome.equals("")) { //verifica se o nome ta vazio
+            System.out.println("Nome inválido!\n");
+        } else {
+            nomeVertice[vertice] = nome;
+            exibirMatCoor();
+            System.out.println("Nome atualizado com sucesso!\n");
         }
     }
 
