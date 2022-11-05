@@ -1,12 +1,10 @@
 package Trabalho;
-
 import java.io.*;
 import java.util.Random;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class Grafo {
-    private BufferedReader br;
-    private StringTokenizer st;
+    private Scanner scan;
     private int[][] matGrafo;
     private int[][] matCoor;
     private int numVertices;
@@ -15,13 +13,14 @@ public class Grafo {
     private int coluna;
     private int peso;
     private String direcionado;
+    private String[] nomeVertice;
     private boolean importado, criado;
 
     public void importar() {
         criado = false;
         try {
-            br = new BufferedReader(new FileReader("grafo.txt"));
-            direcionado = br.readLine();
+            //br = new BufferedReader(new FileReader("grafo.txt"));
+            /*direcionado = br.readLine();
             numVertices = Integer.parseInt(br.readLine());
 
             matCoor = new int[numVertices][2];
@@ -35,7 +34,25 @@ public class Grafo {
                 matCoor[i][1] = coluna;
             }
 
-            numArestas = Integer.parseInt(br.readLine());
+            numArestas = Integer.parseInt(br.readLine());*/
+
+            scan = new Scanner(new FileReader("grafoTeste.txt"));
+            direcionado = scan.nextLine();
+            numVertices = scan.nextInt();
+
+            nomeVertice = new String[numVertices];
+            matCoor = new int[numVertices][2];
+
+            for (int i = 0; i < numVertices; i++) {
+                int indice = scan.nextInt();
+                linha = scan.nextInt();
+                coluna = scan.nextInt();
+                nomeVertice[indice] = scan.nextLine().trim(); //lendo e separando os espaços
+                matCoor[i][0] = linha;
+                matCoor[i][1] = coluna;
+            }
+
+            numArestas = scan.nextInt();
 
             if (verificaDirecionado()) { // verifica se o grafo é direcionado ou nao
                 importado = criaDirecionado(); // retorna se o grafo foi importado ou não
@@ -200,12 +217,12 @@ public class Grafo {
     public void exportar() {
         if (importado || criado) { // so realiza a exportação se o grafo foi importado ou criado
             try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter("grafo.txt"));
+                BufferedWriter bw = new BufferedWriter(new FileWriter("grafoTeste.txt"));
                 bw.write(direcionado + "\n");
                 bw.write(numVertices + "\n");
 
                 for (int i = 0; i < numVertices; i++) {
-                    bw.write(i + " " + matCoor[i][0] + " " + matCoor[i][1] + "\n");
+                    bw.write(i + " " + matCoor[i][0] + " " + matCoor[i][1] + " " + nomeVertice[i] + "\n");
                 }
 
                 bw.write(numArestas + "\n");
@@ -239,7 +256,7 @@ public class Grafo {
 
     public void exibirMatCoor() {
         for (int i = 0; i < numVertices; i++) {
-            System.out.print(i + " " + matCoor[i][0] + " " + matCoor[i][1] + "\n");
+            System.out.print(i + " " + matCoor[i][0] + " " + matCoor[i][1] + " " + nomeVertice[i] + "\n");
         }
         System.out.println();
     }
@@ -257,33 +274,23 @@ public class Grafo {
 
     private boolean criaNaoDirecionado() {
         inicializaMatriz();
-        try {
-            for (int i = 0; i < numArestas; i++) {
-                st = new StringTokenizer(br.readLine());
-                linha = Integer.parseInt(st.nextToken());
-                coluna = Integer.parseInt(st.nextToken());
-                peso = Integer.parseInt(st.nextToken());
-                matGrafo[linha][coluna] = peso;
-                matGrafo[coluna][linha] = peso;
-            }
-        } catch (IOException ex) {
-            return false;
+        for (int i = 0; i < numArestas; i++) {
+            linha = scan.nextInt();
+            coluna = scan.nextInt();
+            peso = scan.nextInt();
+            matGrafo[linha][coluna] = peso;
+            matGrafo[coluna][linha] = peso;
         }
         return true;
     }
 
     private boolean criaDirecionado() {
         inicializaMatriz();
-        try {
-            for (int i = 0; i < numArestas; i++) {
-                st = new StringTokenizer(br.readLine());
-                linha = Integer.parseInt(st.nextToken());
-                coluna = Integer.parseInt(st.nextToken());
-                peso = Integer.parseInt(st.nextToken());
-                matGrafo[linha][coluna] = peso;
-            }
-        } catch (IOException ex) {
-            return false;
+        for (int i = 0; i < numArestas; i++) {
+            linha = scan.nextInt();
+            coluna = scan.nextInt();
+            peso = scan.nextInt();
+            matGrafo[linha][coluna] = peso;
         }
         return true;
     }
