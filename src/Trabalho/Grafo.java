@@ -82,9 +82,10 @@ public class Grafo {
             this.numVertices = numVertices;
             this.numArestas = 0;
             matCoor = new int[this.numVertices][2];
-            //iniciar nomevertice
+            nomeVertice = new String[this.numVertices];
+
             preencheMatCoor();
-            //preenchernomevertice digitando
+            preencheNomeVertice();
 
             matGrafo = new int[this.numVertices][this.numVertices];
             inicializaMatriz();
@@ -287,6 +288,20 @@ public class Grafo {
         for (int i = 0; i < numVertices; i++) {
             matCoor[i][0] = random.nextInt(0,101);
             matCoor[i][1] = random.nextInt(0,101);
+        }
+    }
+
+    private void preencheNomeVertice() {
+        Scanner ler = new Scanner(System.in);
+        String nome;
+        for (int i = 0; i < numVertices; i++) {
+            System.out.println("Informe um nome para o vertice " + i + ": ");
+            nome = ler.nextLine().trim();
+            while (nome.equals("")) { //verifica para o nome não ser vazio
+                System.out.println("Nome inválido! informe outro nome para o vertice " + i + ": ");
+                nome = ler.nextLine().trim();
+            }
+            nomeVertice[i] = nome;
         }
     }
 
