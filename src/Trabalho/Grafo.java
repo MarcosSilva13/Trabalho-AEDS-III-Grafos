@@ -178,15 +178,26 @@ public class Grafo {
         Scanner ler = new Scanner(System.in);
         System.out.println("Informe o novo nome do vértice: ");
         String nome = ler.nextLine().trim();
+        boolean nomeRepetido = false;
 
         if (vertice < 0 || vertice >= numVertices) {
             System.out.println("Vértice não existe!\n");
         } else if (nome.equals("")) { //verifica se o nome ta vazio
             System.out.println("Nome inválido!\n");
         } else {
-            nomeVertice[vertice] = nome;
-            exibirMatCoor();
-            System.out.println("Nome atualizado com sucesso!\n");
+            for (int i = 0; i < nomeVertice.length; i++) {
+                if (nomeVertice[i].equals(nome)) {
+                    System.out.println("Não pode conter nome repetido!\n");
+                    nomeRepetido = true;
+                    break;
+                }
+            }
+
+            if (!nomeRepetido) {
+                nomeVertice[vertice] = nome;
+                exibirMatCoor();
+                System.out.println("Nome atualizado com sucesso!\n");
+            }
         }
     }
 
@@ -297,9 +308,21 @@ public class Grafo {
         for (int i = 0; i < numVertices; i++) {
             System.out.println("Informe um nome para o vertice " + i + ": ");
             nome = ler.nextLine().trim();
+
             while (nome.equals("")) { //verifica para o nome não ser vazio
                 System.out.println("Nome inválido! informe outro nome para o vertice " + i + ": ");
                 nome = ler.nextLine().trim();
+            }
+
+            for (int j = 0; j < nomeVertice.length; j++) {
+                if (nomeVertice[j] != null) {
+                    while (nomeVertice[j].equals(nome)) {
+                        System.out.println("Nome não pode ser repetido! informe outro: ");
+                        nome = ler.nextLine().trim();
+                    }
+                } else {
+                    break;
+                }
             }
             nomeVertice[i] = nome;
         }
