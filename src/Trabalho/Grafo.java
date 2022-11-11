@@ -1,7 +1,6 @@
 package Trabalho;
 import java.io.*;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Grafo {
     private Scanner scan;
@@ -19,23 +18,6 @@ public class Grafo {
     public void importar() {
         criado = false;
         try {
-            //br = new BufferedReader(new FileReader("grafo.txt"));
-            /*direcionado = br.readLine();
-            numVertices = Integer.parseInt(br.readLine());
-
-            matCoor = new int[numVertices][2];
-
-            for (int i = 0; i < numVertices; i++) {
-                st = new StringTokenizer(br.readLine()); //recebe uma linha do arquivo e separa os valores dos espaços
-                int indice = Integer.parseInt(st.nextToken());
-                linha = Integer.parseInt(st.nextToken());
-                coluna = Integer.parseInt(st.nextToken());
-                matCoor[i][0] = linha;
-                matCoor[i][1] = coluna;
-            }
-
-            numArestas = Integer.parseInt(br.readLine());*/
-
             scan = new Scanner(new FileReader("grafoTeste.txt"));
             direcionado = scan.nextLine();
             numVertices = scan.nextInt();
@@ -243,6 +225,55 @@ public class Grafo {
             System.out.println("Vértice não existe!\n");
         }
     }
+
+    public void arvoreGeradoraMinima() {
+        //verificar importado ou criado antes para nao dar erro
+
+        System.out.println("***Árvore Geradora Mínima***");
+        Kruskal kruskal = new Kruskal(numVertices);
+        int ori, dest, peso;
+        int pesoTotal = 0, contAresta = 0, vertice = 0;
+        //numVertices = n
+        //numArestas = m
+        List<Arestas> arestas = new ArrayList<>(); //lista de arestas
+
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                if (matGrafo[i][j] != -1) {
+                    arestas.add(new Arestas(i, j, matGrafo[i][j])); //adiciona todas as arestas na lista
+                }
+            }
+        }
+        //arestas.forEach(are -> System.out.println(are.origem + "-->" + are.destino + " p: " + are.peso));
+
+        //ordena os vertices de acordo com as arestas de menor peso para o mair peso
+        arestas.sort(new Comparator<>() {
+            @Override
+            public int compare(Arestas are1, Arestas are2) {
+                return are1.peso - are2.peso;
+                //retorna 1 se are1 for maior, -1 se are2 for maior e 0 se forem iguais
+            }
+        });
+
+        //contAresta < numVertices-1 para evitar ciclos
+        //|| (vertice < numArestas)
+        while ((contAresta < numVertices-1)) {
+            ori = arestas.get(vertice).origem;
+            dest = arestas.get(vertice).destino;
+            peso = arestas.get(vertice).peso;
+
+            //verifica se os pais são diferentes para evitar ciclos
+            if (kruskal.encontraPai(ori) != kruskal.encontraPai(dest)) {
+                kruskal.uniao(ori, dest); //faz a ligação dos vertices
+                pesoTotal += peso;
+                System.out.println("\t" + ori + "-->" + dest + "\tpeso: " + peso);
+                contAresta++;
+            }
+            vertice++;
+        }
+        System.out.println("Peso total da árvore: " + pesoTotal);
+    }
+
 
     public void exportar() {
         if (importado || criado) { // so realiza a exportação se o grafo foi importado ou criado

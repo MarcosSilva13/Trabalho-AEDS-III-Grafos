@@ -102,10 +102,13 @@ public class Main {
                     grafo.listaCompletaDeAdjacentesDoVertice(vtOrigem);
                     break;
                 case 12:
+                    grafo.arvoreGeradoraMinima();
+                    break;
+                case 13:
                     grafo.exportar();
                     break;
             }
-        } while (opcao != 13);
+        } while (opcao != 14);
     }
     static void menu() {
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
@@ -118,10 +121,11 @@ public class Main {
         System.out.println("* 7 - Editar coordenada dos vértices                *");
         System.out.println("* 8 - Editar nome dos vértices                      *");
         System.out.println("* 9 - Consultar o primeiro adjacente de um vértice  *");
-        System.out.println("* 10 - Consultar o próximo adjacente de um vértice   *");
+        System.out.println("* 10 - Consultar o próximo adjacente de um vértice  *");
         System.out.println("* 11 - Consultar a lista completa de adjacentes     *");
-        System.out.println("* 12 - exportar o grafo para um arquivo de texto    *");
-        System.out.println("* 13 - Sair                                         *");
+        System.out.println("* 12 - Calcular árvore geradora mínima              *");
+        System.out.println("* 13 - exportar o grafo para um arquivo de texto    *");
+        System.out.println("* 14 - Sair                                         *");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.print("Escolha uma opcao: ");
     }
