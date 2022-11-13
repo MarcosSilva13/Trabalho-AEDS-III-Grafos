@@ -82,7 +82,7 @@ public class Grafo {
     public void exibirAdjacencias() {
         System.out.println();
         for (int i = 0; i < numVertices; i++) {
-            System.out.print("   |" + i + "|");
+            System.out.print("\t   |" + i + "|");
 
         }
         System.out.println();
@@ -90,7 +90,7 @@ public class Grafo {
         for (int i = 0; i < numVertices; i++) {
             System.out.print("|" + i + "| ");
             for (int j = 0; j < numVertices; j++) {
-                System.out.print(matGrafo[i][j] + "    ");
+                System.out.print("\t" + matGrafo[i][j] + "    ");
             }
             System.out.println();
         }
@@ -213,7 +213,7 @@ public class Grafo {
     }
 
     public void listaCompletaDeAdjacentesDoVertice(int vertice) {
-        if (vertice >= 0 && vertice < numVertices) {
+        if (vertice >= 0 && vertice < numVertices) { //verifica se o vertice existe
             System.out.print("Vértice " + vertice + " adjacentes: ");
             for (int i = 0; i < numVertices; i++) {
                 if (matGrafo[vertice][i] != -1) {
@@ -266,7 +266,7 @@ public class Grafo {
             if (kruskal.encontraPai(ori) != kruskal.encontraPai(dest)) {
                 kruskal.uniao(ori, dest); //faz a ligação dos vertices
                 pesoTotal += peso;
-                System.out.println("\t" + ori + "-->" + dest + "\tpeso: " + peso);
+                System.out.println("\t" + ori + " --> " + dest + " \tpeso: " + peso);
                 contAresta++;
             }
             vertice++;
@@ -274,6 +274,38 @@ public class Grafo {
         System.out.println("Peso total da árvore: " + pesoTotal);
     }
 
+    public void calculaMenorCaminho() {
+        //verificar importado ou criado antes para nao dar erro
+
+        Scanner ler = new Scanner(System.in);
+        int vOri = -1, vDest = -1; //para guardar o número do vértice
+        System.out.println("Informe o nome do vértice de origem: ");
+        String nomeOrigem = ler.nextLine();
+        System.out.println("Informe o nome do vértice de destino: ");
+        String nomeDestino = ler.nextLine();
+        System.out.println("origem: " + nomeOrigem + " destino: " + nomeDestino);
+
+        for (int i = 0; i < nomeVertice.length; i++) {
+            if (nomeVertice[i].equals(nomeOrigem)) {
+                vOri = i;
+                break;
+            }
+        }
+
+        for (int i = 0; i < nomeVertice.length; i++) {
+            if (nomeVertice[i].equals(nomeDestino)) {
+                vDest = i;
+                break;
+            }
+        }
+
+        if ((vOri != -1) && (vDest != -1)) {
+            Dijkstra dijkstra = new Dijkstra(matGrafo, vOri, vDest, numVertices);
+            dijkstra.menorCaminho();
+        } else {
+            System.out.println("Algum nome não foi encontrado!\n");
+        }
+    }
 
     public void exportar() {
         if (importado || criado) { // so realiza a exportação se o grafo foi importado ou criado
@@ -348,7 +380,7 @@ public class Grafo {
             for (int j = 0; j < nomeVertice.length; j++) {
                 if (nomeVertice[j] != null) {
                     while (nomeVertice[j].equals(nome)) {
-                        System.out.println("Nome não pode ser repetido! informe outro: ");
+                        System.out.println("O Nome informado já existe! Informe outro: ");
                         nome = ler.nextLine().trim();
                     }
                 } else {

@@ -105,10 +105,13 @@ public class Main {
                     grafo.arvoreGeradoraMinima();
                     break;
                 case 13:
+                    grafo.calculaMenorCaminho();
+                    break;
+                case 14:
                     grafo.exportar();
                     break;
             }
-        } while (opcao != 14);
+        } while (opcao != 15);
     }
     static void menu() {
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
@@ -124,8 +127,9 @@ public class Main {
         System.out.println("* 10 - Consultar o próximo adjacente de um vértice  *");
         System.out.println("* 11 - Consultar a lista completa de adjacentes     *");
         System.out.println("* 12 - Calcular árvore geradora mínima              *");
-        System.out.println("* 13 - exportar o grafo para um arquivo de texto    *");
-        System.out.println("* 14 - Sair                                         *");
+        System.out.println("* 13 - Calcular o menor caminho                     *");
+        System.out.println("* 14 - exportar o grafo para um arquivo de texto    *");
+        System.out.println("* 15 - Sair                                         *");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * *");
         System.out.print("Escolha uma opcao: ");
     }
