@@ -1,4 +1,4 @@
-package Trabalho;
+package trabalho;
 
 public class Kruskal {
     int[] pai;

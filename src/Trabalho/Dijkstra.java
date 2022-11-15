@@ -1,4 +1,4 @@
-package Trabalho;
+package trabalho;
 public class Dijkstra {
     private int [][] matGrafo;
     private int origem;
