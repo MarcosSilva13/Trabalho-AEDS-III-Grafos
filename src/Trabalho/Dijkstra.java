@@ -1,7 +1,4 @@
 package Trabalho;
-
-import org.w3c.dom.ls.LSOutput;
-
 public class Dijkstra {
     private int [][] matGrafo;
     private int origem;
@@ -65,7 +62,7 @@ public class Dijkstra {
                     soma = matGrafo[verticeProcessado][vizinho] + dist[verticeProcessado];
 
                     if (soma < dist[vizinho]) { //verifica para decidir o caminho melhor
-                        ant[vizinho] = verticeProcessado;
+                        ant[vizinho] = verticeProcessado; //vertice processado vira pai do vizinho
                         dist[vizinho] = soma;
                     }
                 }
