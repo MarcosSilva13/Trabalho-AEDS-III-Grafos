@@ -167,8 +167,8 @@ public class Grafo {
         } else if (nome.equals("")) { //verifica se o nome ta vazio
             System.out.println("Nome inválido!\n");
         } else {
-            for (int i = 0; i < nomeVertice.length; i++) {
-                if (nomeVertice[i].equals(nome)) {
+            for (String nomes : nomeVertice) {
+                if (nomes.equals(nome)) {
                     System.out.println("Não pode conter nome repetido!\n");
                     nomeRepetido = true;
                     break;
