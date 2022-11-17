@@ -377,10 +377,11 @@ public class Grafo {
                 nome = ler.nextLine().trim();
             }
 
-            for (int j = 0; j < nomeVertice.length; j++) {
-                if (nomeVertice[j] != null) {
-                    while (nomeVertice[j].equals(nome)) {
-                        System.out.println("O Nome informado já existe! Informe outro: ");
+            for (String nomes : nomeVertice) {
+                if (nomes != null) {
+                    while (nomes.equals(nome) || nome.equals("")) {
+                        //System.out.println("O Nome informado já existe! Informe outro: ");
+                        System.out.println("Nome inválido! informe outro nome para o vertice " + i + ": ");
                         nome = ler.nextLine().trim();
                     }
                 } else {

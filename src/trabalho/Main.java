@@ -110,6 +110,11 @@ public class Main {
                 case 14:
                     grafo.exportar();
                     break;
+                case 15:
+                    break;
+                default:
+                    System.out.println("Opção inválida!\n");
+                    break;
             }
         } while (opcao != 15);
     }
