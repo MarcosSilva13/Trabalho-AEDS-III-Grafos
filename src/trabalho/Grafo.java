@@ -8,8 +8,8 @@ public class Grafo {
     private int[][] matCoor;
     private int numVertices;
     private int numArestas;
-    private int linha;
-    private int coluna;
+    private int x;
+    private int y;
     private int peso;
     private String direcionado;
     private String[] nomeVertice;
@@ -27,11 +27,11 @@ public class Grafo {
 
             for (int i = 0; i < numVertices; i++) {
                 int indice = scan.nextInt();
-                linha = scan.nextInt();
-                coluna = scan.nextInt();
+                x = scan.nextInt();
+                y = scan.nextInt();
                 nomeVertice[indice] = scan.nextLine().trim(); //lendo e separando os espaços
-                matCoor[i][0] = linha;
-                matCoor[i][1] = coluna;
+                matCoor[i][0] = x;
+                matCoor[i][1] = y;
             }
 
             numArestas = scan.nextInt();
@@ -227,83 +227,88 @@ public class Grafo {
     }
 
     public void arvoreGeradoraMinima() {
-        //verificar importado ou criado antes para nao dar erro
+        if (importado || criado) {
+            System.out.println("***Árvore Geradora Mínima***");
+            Kruskal kruskal = new Kruskal(numVertices);
+            int ori, dest, peso;
+            int pesoTotal = 0, contAresta = 0, vertice = 0;
+            List<Arestas> arestas = new ArrayList<>(); //lista de arestas
 
-        System.out.println("***Árvore Geradora Mínima***");
-        Kruskal kruskal = new Kruskal(numVertices);
-        int ori, dest, peso;
-        int pesoTotal = 0, contAresta = 0, vertice = 0;
-        //numVertices = n
-        //numArestas = m
-        List<Arestas> arestas = new ArrayList<>(); //lista de arestas
-
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
-                if (matGrafo[i][j] != -1) {
-                    arestas.add(new Arestas(i, j, matGrafo[i][j])); //adiciona todas as arestas na lista
+            for (int i = 0; i < numVertices; i++) {
+                for (int j = 0; j < numVertices; j++) {
+                    if (matGrafo[i][j] != -1) {
+                        arestas.add(new Arestas(i, j, matGrafo[i][j])); //adiciona todas as arestas na lista
+                    }
                 }
             }
-        }
-        //arestas.forEach(are -> System.out.println(are.origem + "-->" + are.destino + " p: " + are.peso));
 
-        //ordena os vertices de acordo com as arestas de menor peso para o mair peso
-        arestas.sort(new Comparator<>() {
-            @Override
-            public int compare(Arestas are1, Arestas are2) {
-                return are1.peso - are2.peso;
-                //retorna 1 se are1 for maior, -1 se are2 for maior e 0 se forem iguais
+            //ordena os vertices de acordo com as arestas de menor peso para o mair peso
+            arestas.sort(new Comparator<>() {
+                @Override
+                public int compare(Arestas are1, Arestas are2) {
+                    return are1.peso - are2.peso;
+                    //retorna um valor positivo se are1 é maior que are2, 0 se forem iguais e negativo se are2 for maior
+                }
+            });
+
+            //contAresta < numVertices-1 para evitar ciclos
+            while ((contAresta < numVertices-1)) {
+                ori = arestas.get(vertice).origem;
+                dest = arestas.get(vertice).destino;
+                peso = arestas.get(vertice).peso;
+
+                //verifica se os pais são diferentes para evitar ciclos
+                if (kruskal.encontraPai(ori) != kruskal.encontraPai(dest)) {
+                    kruskal.uniao(ori, dest); //faz a ligação dos vertices
+                    pesoTotal += peso;
+                    System.out.println("\t" + ori + " --> " + dest + " \tpeso: " + peso);
+                    contAresta++;
+                }
+                vertice++;
             }
-        });
-
-        //contAresta < numVertices-1 para evitar ciclos
-        //|| (vertice < numArestas)
-        while ((contAresta < numVertices-1)) {
-            ori = arestas.get(vertice).origem;
-            dest = arestas.get(vertice).destino;
-            peso = arestas.get(vertice).peso;
-
-            //verifica se os pais são diferentes para evitar ciclos
-            if (kruskal.encontraPai(ori) != kruskal.encontraPai(dest)) {
-                kruskal.uniao(ori, dest); //faz a ligação dos vertices
-                pesoTotal += peso;
-                System.out.println("\t" + ori + " --> " + dest + " \tpeso: " + peso);
-                contAresta++;
-            }
-            vertice++;
+            System.out.println("Peso total da árvore: " + pesoTotal);
+        } else {
+            System.out.println("Nenhum grafo foi encontrado!\n");
         }
-        System.out.println("Peso total da árvore: " + pesoTotal);
     }
 
     public void calculaMenorCaminho() {
-        //verificar importado ou criado antes para nao dar erro
+        if (importado || criado) {
+            Scanner ler = new Scanner(System.in);
+            int vOri = -1, vDest = -1; //para guardar o número do vértice
+            System.out.println("Informe o nome do vértice de origem: ");
+            String nomeOrigem = ler.nextLine();
+            System.out.println("Informe o nome do vértice de destino: ");
+            String nomeDestino = ler.nextLine();
 
-        Scanner ler = new Scanner(System.in);
-        int vOri = -1, vDest = -1; //para guardar o número do vértice
-        System.out.println("Informe o nome do vértice de origem: ");
-        String nomeOrigem = ler.nextLine();
-        System.out.println("Informe o nome do vértice de destino: ");
-        String nomeDestino = ler.nextLine();
-        System.out.println("origem: " + nomeOrigem + " destino: " + nomeDestino);
-
-        for (int i = 0; i < nomeVertice.length; i++) {
-            if (nomeVertice[i].equals(nomeOrigem)) {
-                vOri = i;
-                break;
+            for (int i = 0; i < nomeVertice.length; i++) {
+                if (nomeVertice[i].equals(nomeOrigem)) {
+                    vOri = i;
+                    break;
+                }
             }
-        }
 
-        for (int i = 0; i < nomeVertice.length; i++) {
-            if (nomeVertice[i].equals(nomeDestino)) {
-                vDest = i;
-                break;
+            for (int i = 0; i < nomeVertice.length; i++) {
+                if (nomeVertice[i].equals(nomeDestino)) {
+                    vDest = i;
+                    break;
+                }
             }
-        }
 
-        if ((vOri != -1) && (vDest != -1)) {
-            Dijkstra dijkstra = new Dijkstra(matGrafo, vOri, vDest, numVertices);
-            dijkstra.menorCaminho();
+            if (vOri != -1) {
+                if (vDest != -1) {
+                    System.out.println("origem: " + nomeOrigem + " destino: " + nomeDestino);
+                    Dijkstra dijkstra = new Dijkstra(matGrafo, vOri, vDest, numVertices);
+                    dijkstra.menorCaminho();
+                } else {
+                    System.out.println("Nome do vértice de destino não encontrado!\n");
+                }
+            } else {
+                System.out.println("Nome do vértice de origem não encontrado!\n");
+            }
+
         } else {
-            System.out.println("Algum nome não foi encontrado!\n");
+            System.out.println("Nenhum grafo foi encontrado!\n");
         }
     }
 
@@ -343,7 +348,7 @@ public class Grafo {
                 System.out.println(ex.getMessage());
             }
         } else {
-            System.out.println("Não foi possível exportar o grafo!\n");
+            System.out.println("Nenhum grafo foi encontrado para exportar!\n");
         }
     }
 
@@ -380,7 +385,6 @@ public class Grafo {
             for (String nomes : nomeVertice) {
                 if (nomes != null) {
                     while (nomes.equals(nome) || nome.equals("")) {
-                        //System.out.println("O Nome informado já existe! Informe outro: ");
                         System.out.println("Nome inválido! informe outro nome para o vertice " + i + ": ");
                         nome = ler.nextLine().trim();
                     }
@@ -395,11 +399,11 @@ public class Grafo {
     private boolean criaNaoDirecionado() {
         inicializaMatriz();
         for (int i = 0; i < numArestas; i++) {
-            linha = scan.nextInt();
-            coluna = scan.nextInt();
+            x = scan.nextInt();
+            y = scan.nextInt();
             peso = scan.nextInt();
-            matGrafo[linha][coluna] = peso;
-            matGrafo[coluna][linha] = peso;
+            matGrafo[x][y] = peso;
+            matGrafo[y][x] = peso;
         }
         return true;
     }
@@ -407,10 +411,10 @@ public class Grafo {
     private boolean criaDirecionado() {
         inicializaMatriz();
         for (int i = 0; i < numArestas; i++) {
-            linha = scan.nextInt();
-            coluna = scan.nextInt();
+            x = scan.nextInt();
+            y = scan.nextInt();
             peso = scan.nextInt();
-            matGrafo[linha][coluna] = peso;
+            matGrafo[x][y] = peso;
         }
         return true;
     }

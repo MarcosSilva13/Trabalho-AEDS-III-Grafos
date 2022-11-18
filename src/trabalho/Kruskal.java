@@ -11,7 +11,6 @@ public class Kruskal {
     }
 
     public int encontraPai(int vertice) { //busca pelo pai de um vertice ou antecessor
-        //System.out.println("V: " + vertice + " pai: " + pai[vertice]);
         if (pai[vertice] == vertice) {
             return vertice;
         }
