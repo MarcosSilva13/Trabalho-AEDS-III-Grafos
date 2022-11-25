@@ -1,16 +1,38 @@
-direcionado=sim
-6
-0 10 20 a
-1 7 18 b
-2 5 15 c
-3 20 50 d
-4 60 80 e
-5 55 30 f
-7
-0 1 20
-0 2 10
-0 4 100
-2 1 66
-2 3 90
-4 4 6
-5 1 40
+direcionado=nao
+12
+0 1 1 Guanhaes
+1 50 20 Sao Joao Evangelista
+2 10 30 Paulistas
+3 12 50 Peçanha
+4 15 70 Sabinopolis
+5 20 90 Virginopolis
+6 25 11 Senhora do Porto
+7 30 12 Governador Valadares
+8 35 15 Ipatinga
+9 40 20 Belo Horizonte
+10 30 45 Itabira
+11 50 78 Coluna
+23
+0 1 5
+0 5 1
+0 11 3
+1 4 6
+1 5 3
+2 3 9
+2 4 3
+2 5 7
+2 10 5
+3 4 2
+3 8 2
+3 10 8
+4 5 1
+5 10 7
+5 11 1
+6 7 5
+6 10 1
+6 11 5
+7 8 4
+7 10 4
+8 9 1
+9 10 1
+10 11 3
