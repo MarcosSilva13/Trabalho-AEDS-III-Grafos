@@ -1,6 +1,7 @@
 package trabalho;
 public class Dijkstra {
     private int [][] matGrafo;
+    private String[] nomeVertices;
     private int origem;
     private int destino;
     private int numVertices;
@@ -8,11 +9,12 @@ public class Dijkstra {
     private int[] visitado;
     private boolean temCaminho = false;
 
-    public Dijkstra(int[][] matGrafo, int origem, int destino, int numVertices) {
+    public Dijkstra(int[][] matGrafo, int origem, int destino, int numVertices, String[] nomeVertices) {
         this.matGrafo = matGrafo;
         this.origem = origem;
         this.destino = destino;
         this.numVertices = numVertices;
+        this.nomeVertices = nomeVertices;
     }
 
     private int menorDistancia() {
@@ -75,13 +77,15 @@ public class Dijkstra {
         System.out.println();
         if (temCaminho && ant[caminho] != -1) {
             while (caminho != origem) {
-                System.out.print(caminho + " <-- ");
+                System.out.print(nomeVertices[caminho] + " {" + caminho + "}" + " <-- ");
                 caminho = ant[caminho];
             }
-            System.out.println(origem);
-            System.out.println("\nDistância de " + origem + " até " + destino + " é " + dist[destino] + "\n");
+            System.out.println(nomeVertices[origem] + " {" + origem + "}");
+            System.out.println("\nDistância de " + nomeVertices[origem] + " até " + nomeVertices[destino]
+                    + " é " + dist[destino] + "\n");
         } else {
-            System.out.println("O caminho de " + origem + " até " + destino + " não existe!\n");
+            System.out.println("O caminho de " + nomeVertices[origem] + " até " + nomeVertices[destino]
+                    + " não existe!\n");
         }
     }
 }

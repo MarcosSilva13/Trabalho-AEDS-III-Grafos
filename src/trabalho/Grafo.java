@@ -18,7 +18,7 @@ public class Grafo {
     public void importar() {
         criado = false;
         try {
-            scan = new Scanner(new FileReader("grafoTeste.txt"));
+            scan = new Scanner(new FileReader("grafo.txt"));
             direcionado = scan.nextLine();
             numVertices = scan.nextInt();
 
@@ -298,7 +298,7 @@ public class Grafo {
             if (vOri != -1) {
                 if (vDest != -1) {
                     System.out.println("origem: " + nomeOrigem + " destino: " + nomeDestino);
-                    Dijkstra dijkstra = new Dijkstra(matGrafo, vOri, vDest, numVertices);
+                    Dijkstra dijkstra = new Dijkstra(matGrafo, vOri, vDest, numVertices, nomeVertice);
                     dijkstra.menorCaminho();
                 } else {
                     System.out.println("Nome do vértice de destino não encontrado!\n");
@@ -315,7 +315,7 @@ public class Grafo {
     public void exportar() {
         if (importado || criado) { // so realiza a exportação se o grafo foi importado ou criado
             try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter("grafoTeste.txt"));
+                BufferedWriter bw = new BufferedWriter(new FileWriter("grafo.txt"));
                 bw.write(direcionado + "\n");
                 bw.write(numVertices + "\n");
 
