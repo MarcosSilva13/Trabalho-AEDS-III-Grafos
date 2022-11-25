@@ -169,7 +169,7 @@ public class Grafo {
         } else {
             for (String nomes : nomeVertice) {
                 if (nomes.equals(nome)) {
-                    System.out.println("Não pode conter nome repetido!\n");
+                    System.out.println("O nome não pode ser repetido!\n");
                     nomeRepetido = true;
                     break;
                 }
@@ -228,7 +228,7 @@ public class Grafo {
 
     public void arvoreGeradoraMinima() {
         if (importado || criado) {
-            System.out.println("***Árvore Geradora Mínima***");
+            System.out.println("\n***Árvore Geradora Mínima***");
             Kruskal kruskal = new Kruskal(numVertices);
             int ori, dest, peso;
             int pesoTotal = 0, contAresta = 0, vertice = 0;
@@ -266,7 +266,7 @@ public class Grafo {
                 }
                 vertice++;
             }
-            System.out.println("Peso total da árvore: " + pesoTotal);
+            System.out.println("Peso total da árvore: " + pesoTotal + "\n");
         } else {
             System.out.println("Nenhum grafo foi encontrado!\n");
         }
@@ -374,18 +374,19 @@ public class Grafo {
         Scanner ler = new Scanner(System.in);
         String nome;
         for (int i = 0; i < numVertices; i++) {
-            System.out.println("Informe um nome para o vertice " + i + ": ");
+            System.out.println("Informe um nome para o vértice " + i + ": ");
             nome = ler.nextLine().trim();
 
             while (nome.equals("")) { //verifica para o nome não ser vazio
-                System.out.println("Nome inválido! informe outro nome para o vertice " + i + ": ");
+                System.out.println("Nome inválido! informe outro nome para o vértice " + i + ": ");
                 nome = ler.nextLine().trim();
             }
 
             for (String nomes : nomeVertice) {
                 if (nomes != null) {
+                    //para não deixar o nome ser repetido ou vazio
                     while (nomes.equals(nome) || nome.equals("")) {
-                        System.out.println("Nome inválido! informe outro nome para o vertice " + i + ": ");
+                        System.out.println("Nome inválido! informe outro nome para o vértice " + i + ": ");
                         nome = ler.nextLine().trim();
                     }
                 } else {

@@ -54,7 +54,7 @@ public class Main {
                     break;
                 case 7:
                     grafo.exibirMatCoor();
-                    System.out.print("Informe o vértice: ");
+                    System.out.print("Informe o número do vértice: ");
                     vtOrigem = scan.nextInt();
                     System.out.print("Informe a nova coordenada X: ");
                     int x = scan.nextInt();
@@ -64,12 +64,12 @@ public class Main {
                     break;
                 case 8:
                     grafo.exibirMatCoor();
-                    System.out.println("Informe o vértice: ");
+                    System.out.println("Informe o número do vértice: ");
                     vtOrigem = scan.nextInt();
                     grafo.editarNomeVertice(vtOrigem);
                     break;
                 case 9:
-                    System.out.print("Informe o vértice: ");
+                    System.out.print("Informe o número do vértice: ");
                     vtOrigem = scan.nextInt();
                     verticeAdj = grafo.primeiroAdjacenteDoVertice(vtOrigem);
                     if (verticeAdj >= 0) {
@@ -82,9 +82,9 @@ public class Main {
                     }
                     break;
                 case 10:
-                    System.out.print("Informe o vértice: ");
+                    System.out.print("Informe o número do vértice: ");
                     vtOrigem = scan.nextInt();
-                    System.out.print("Informe o vértice atual: ");
+                    System.out.print("Informe o número do vértice atual: ");
                     int atual = scan.nextInt();
                     verticeAdj = grafo.proximoAdjacenteDoVertice(vtOrigem,atual);
                     if (verticeAdj >= 0) {
@@ -97,7 +97,7 @@ public class Main {
                     }
                     break;
                 case 11:
-                    System.out.print("Informe o vértice: ");
+                    System.out.print("Informe o número do vértice: ");
                     vtOrigem = scan.nextInt();
                     grafo.listaCompletaDeAdjacentesDoVertice(vtOrigem);
                     break;

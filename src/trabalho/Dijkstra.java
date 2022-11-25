@@ -33,7 +33,7 @@ public class Dijkstra {
         return min; //retorna o vertice com a menor distância
     }
     public void menorCaminho() {
-        int contVertice = numVertices, soma = 0, verticeProcessado = 0; //talvez mudar pra -1
+        int contVertice = numVertices, soma, verticeProcessado;
         int[] ant = new int[numVertices];
         visitado = new int[numVertices];
         dist = new int[numVertices];
@@ -62,7 +62,7 @@ public class Dijkstra {
                     soma = matGrafo[verticeProcessado][vizinho] + dist[verticeProcessado];
 
                     if (soma < dist[vizinho]) { //verifica para decidir o caminho melhor
-                        ant[vizinho] = verticeProcessado; //vertice processado vira pai do vizinho
+                        ant[vizinho] = verticeProcessado; //vértice vizinho vai ter como antecessor o vértice processado
                         dist[vizinho] = soma;
                     }
                 }
